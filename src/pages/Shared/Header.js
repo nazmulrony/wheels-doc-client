@@ -13,10 +13,13 @@ const Header = () => {
         <li className='font-semibold'> <Link to='/'>Blog</Link></li>
         {
             user?.email ?
-                <li className='font-semibold flex items-center gap-2'>
-                    <Link to='/orders'>Orders</Link>
-                    <button onClick={logOut} className='btn btn-sm text-light rounded-full text-xs'>Logout</button>
-                </li>
+                <>
+                    <li className='font-semibold'>
+                        <Link to='/orders'>Orders</Link>
+
+                    </li>
+                    <li><button onClick={logOut} className='btn btn-sm text-light rounded-full text-xs my-auto'>Logout</button></li>
+                </>
                 :
                 <li className='font-semibold'> <Link to='/login'>Login</Link></li>
         }
