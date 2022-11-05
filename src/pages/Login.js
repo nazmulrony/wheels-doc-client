@@ -3,6 +3,7 @@ import { FaGithub, FaGoogle } from 'react-icons/fa';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import loginImg from '../assets/images/login/login.svg'
 import { AuthContext } from '../contexts/AuthProvider';
+import { SetAuthToken } from '../JwtAuth/JwtAuth';
 
 const Login = () => {
     const { loginUser, googleSignIn, githubSignIn, } = useContext(AuthContext);
@@ -22,7 +23,9 @@ const Login = () => {
                 form.reset();
                 console.log(user);
                 setError('');
+                SetAuthToken(user);
                 navigate(from, { replace: true });
+
             })
             .catch(error => setError(error.message));
 
@@ -33,7 +36,8 @@ const Login = () => {
                 const user = result.user;
                 console.log(user);
                 setError('');
-                navigate('/');
+                SetAuthToken(user)
+                navigate(from, { replace: true });
             })
             .catch(error => {
                 setError(error.message)
@@ -46,7 +50,8 @@ const Login = () => {
                 const user = result.user;
                 console.log(user);
                 setError('');
-                navigate('/');
+                SetAuthToken(user)
+                navigate(from, { replace: true });
             })
             .catch(error => {
                 setError(error.message)
@@ -67,7 +72,7 @@ const Login = () => {
                     </div>
                     <div className="flex flex-col mb-3">
                         <label htmlFor="password">Password</label>
-                        <input type="password" name="password" id="password" className='p-2 rounded-md text-darks' placeholder='Enter your password' required />
+                        <input type="password" name="password" id="password" className='p-2 rounded-md text-dark' placeholder='Enter your password' required />
                     </div>
                     {
                         error && <p className='text-red-600'> {error}</p>

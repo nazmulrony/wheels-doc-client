@@ -27,10 +27,11 @@ const Checkout = () => {
             toast.error('Phone number should be at least 10 characters.')
 
         } else {
-            fetch('http://localhost:5000/orders', {
+            fetch('https://wheels-doc-server-nazmulrony.vercel.app/orders', {
                 method: 'POST',
                 headers: {
-                    'content-type': 'application/json'
+                    'content-type': 'application/json',
+                    authorization: `Bearer ${localStorage.getItem('wheels-doc-token')}`
                 },
                 body: JSON.stringify(order)
             })
@@ -58,7 +59,7 @@ const Checkout = () => {
                 </div>
             </div>
             <h2 className="text-3xl font-semibold text-center mt-10 text-dark">Service: {title}</h2>
-            <form onSubmit={handlePlaceOrder} className='mt-6 p-4 md:p-16 rounded-xl bg-dark shadow-lg shadow-black/50'>
+            <form onSubmit={handlePlaceOrder} className='mt-6 p-4 md:p-16 rounded-xl bg-light shadow-xl shadow-black/20'>
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
                     <input name='firstName' type="text" placeholder="First Name" className="input input-bordered  w-full " required />
                     <input name='lastName' type="text" placeholder="Last Name" className="input input-bordered  w-full " required />

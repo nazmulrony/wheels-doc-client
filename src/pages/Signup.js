@@ -1,12 +1,16 @@
 import React, { useContext, useState } from 'react';
 import { FaGithub, FaGoogle } from 'react-icons/fa';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import loginImg from '../assets/images/login/login.svg'
 import { AuthContext } from '../contexts/AuthProvider';
+import { SetAuthToken } from '../JwtAuth/JwtAuth';
 
 const Signup = () => {
-    const navigate = useNavigate();
+
     const { createUser, updateUserProfile, googleSignIn, githubSignIn } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/'
     // reg error state
     const [error, setError] = useState('')
     const handleSubmit = (event) => {
@@ -21,7 +25,8 @@ const Signup = () => {
                 console.log(user);
                 updateUserProfile(name);
                 setError('');
-                navigate('/');
+                SetAuthToken(user)
+                navigate(from, { replace: true });
             })
             .catch(error => {
                 setError(error.message);
@@ -34,7 +39,8 @@ const Signup = () => {
                 const user = result.user;
                 console.log(user);
                 setError('');
-                navigate('/');
+                SetAuthToken(user)
+                navigate(from, { replace: true });
             })
             .catch(error => {
                 setError(error.message)
@@ -47,7 +53,8 @@ const Signup = () => {
                 const user = result.user;
                 console.log(user);
                 setError('');
-                navigate('/');
+                SetAuthToken(user)
+                navigate(from, { replace: true });
             })
             .catch(error => {
                 setError(error.message)

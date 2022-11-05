@@ -18,7 +18,7 @@ const Header = () => {
                         <Link to='/orders'>Orders</Link>
 
                     </li>
-                    <li><button onClick={logOut} className='btn btn-sm text-light rounded-full text-xs my-auto'>Logout</button></li>
+                    <li><button onClick={logOut} className=' text-light bg-dark h-1 ml-1 w-20 rounded-full my-auto '>Logout</button></li>
                 </>
                 :
                 <li className='font-semibold'> <Link to='/login'>Login</Link></li>
